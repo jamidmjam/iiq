@@ -1,9 +1,23 @@
-/identityiq-build/
-/*.war
+# 💥 Build artifacts
+identityiq-build/
+*.war
+*.class
 
+# 🔌 Connector bundles & large libs
+identityiq-war-base/identityiq.war
+identityiq-war-base/WEB-INF/lib-connectors/
+identityiq-war-base/WEB-INF/lib/*.jar
+
+# 🧪 IDE and environment files
 .idea/
 *.iml
 .vscode/
+*.log
 
-.DS_STORE
+# 🍎 macOS & Windows
+.DS_Store
 Thumbs.db
+
+# 🛑 Optional: SailPoint internal cache/output
+sailpoint-object-export.xml
+
