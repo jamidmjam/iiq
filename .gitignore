@@ -1,0 +1,9 @@
+/identityiq-build/
+/*.war
+
+.idea/
+*.iml
+.vscode/
+
+.DS_STORE
+Thumbs.db
