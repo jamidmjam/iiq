@@ -1,0 +1,41 @@
+employeeId,firstName,lastName,managerId,fullName,email,department,region,location,inactiveUser,jobtitle,costcenter,workStatus
+E1001,Thomas,Burton,,Thomas Burton,Thomas.Burton@example.com,IT Security,Europe,Berlin,FALSE,Specialist,CC100,Part-Time
+E1002,Dennis,Lopez,E1010,Dennis Lopez,Dennis.Lopez@example.com,HR,Europe,London,FALSE,Manager,CC400,Full-Time
+E1003,Mary,Lee,E1032,Mary Lee,Mary.Lee@example.com,IT Security,Asia-Pacific,Dallas,TRUE,Specialist,"CC300,CC100",Contract
+E1004,Allen,Martinez,E1006,Allen Martinez,Allen.Martinez@example.com,Legal,Europe,Toronto,FALSE,Manager,CC200,Part-Time
+E1005,Dennis,Lee,E1032,Dennis Lee,Dennis.Lee@example.com,Engineering,Asia-Pacific,Toronto,TRUE,Manager,CC200,Full-Time
+E1006,Jakob,Petrick,E1007,Jakob Petrick,Jakob.Petrick@example.com,Marketing,Asia-Pacific,Dallas,FALSE,Specialist,"CC400,CC200",Contract
+E1007,Sandra,Lee,E1025,Sandra Lee,Sandra.Lee@example.com,Engineering,Asia-Pacific,Toronto,FALSE,Manager,"CC200,CC100",Full-Time
+E1008,Dennis,Nichols,E1025,Dennis Nichols,Dennis.Nichols@example.com,Marketing,Americas,Sydney,TRUE,Manager,CC400,Full-Time
+E1009,Dennis,Barnes,E1038,Dennis Barnes,Dennis.Barnes@example.com,Marketing,Americas,Toronto,FALSE,Director,CC100,Part-Time
+E1010,Allen,Barnes,E1027,Allen Barnes,Allen.Barnes@example.com,IT Security,Europe,Dallas,FALSE,Specialist,"CC200,CC400",Contract
+E1011,Tyler,Lopez,E1019,Tyler Lopez,Tyler.Lopez@example.com,Engineering,Americas,Toronto,FALSE,Engineer,"CC400,CC500",Contract
+E1012,Carl,Kennedy,E1006,Carl Kennedy,Carl.Kennedy@example.com,Engineering,Europe,Toronto,FALSE,Manager,CC300,Full-Time
+E1013,Mary,Johnson,E1020,Mary Johnson,Mary.Johnson@example.com,IT Security,Asia-Pacific,Berlin,FALSE,Director,CC400,Contract
+E1014,Lauren,Henderson,E1036,Lauren Henderson,Lauren.Henderson@example.com,Marketing,Asia-Pacific,Dallas,TRUE,Engineer,"CC500,CC100",Part-Time
+E1015,Aaron,Lopez,E1019,Aaron Lopez,Aaron.Lopez@example.com,IT Security,Europe,New York,TRUE,Director,"CC500,CC100",Part-Time
+E1016,Lauren,Foster,E1012,Lauren Foster,Lauren.Foster@example.com,Marketing,Americas,Dallas,FALSE,Engineer,CC100,Contract
+E1017,Douglas,Burton,E1030,Douglas Burton,Douglas.Burton@example.com,Operations,Americas,London,TRUE,Specialist,CC200,Full-Time
+E1018,Douglas,Kennedy,E1031,Douglas Kennedy,Douglas.Kennedy@example.com,Operations,Europe,Toronto,TRUE,Manager,CC200,Part-Time
+E1019,Douglas,Foster,E1032,Douglas Foster,Douglas.Foster@example.com,Legal,Americas,Toronto,FALSE,Engineer,"CC300,CC400",Full-Time
+E1020,Thomas,Henderson,E1034,Thomas Henderson,Thomas.Henderson@example.com,IT Security,Europe,Sydney,TRUE,Analyst,"CC100,CC300",Contract
+E1021,Thomas,Harrison,E1034,Thomas Harrison,Thomas.Harrison@example.com,Operations,Europe,Toronto,FALSE,Manager,CC100,Contract
+E1022,James,Flores,E1029,James Flores,James.Flores@example.com,Legal,Asia-Pacific,Sydney,FALSE,Specialist,"CC400,CC100",Full-Time
+E1023,Adam,Henderson,E1002,Adam Henderson,Adam.Henderson@example.com,Marketing,Asia-Pacific,Toronto,TRUE,Director,CC200,Full-Time
+E1024,Walter,Brouwer,E1006,Walter Brouwer,Walter.Brouwer@example.com,Marketing,Asia-Pacific,Berlin,TRUE,Manager,"CC400,CC100",Part-Time
+E1025,James,Kennedy,E1029,James Kennedy,James.Kennedy@example.com,Finance,Americas,Toronto,FALSE,Engineer,CC400,Contract
+E1026,Thomas,Nichols,E1015,Thomas Nichols,Thomas.Nichols@example.com,IT Security,Asia-Pacific,Berlin,TRUE,Specialist,"CC500,CC400",Full-Time
+E1027,Sandra,Petrick,E1024,Sandra Petrick,Sandra.Petrick@example.com,Marketing,Asia-Pacific,Toronto,FALSE,Director,"CC200,CC500",Full-Time
+E1028,Jim,Flores,E1023,Jim Flores,Jim.Flores@example.com,Finance,Europe,Toronto,TRUE,Analyst,CC400,Part-Time
+E1029,Walter,Foster,E1027,Walter Foster,Walter.Foster@example.com,Engineering,Asia-Pacific,New York,FALSE,Analyst,"CC300,CC400",Contract
+E1030,Jakob,Smith,E1032,Jakob Smith,Jakob.Smith@example.com,Marketing,Asia-Pacific,Sydney,FALSE,Manager,CC200,Full-Time
+E1031,Jim,Burton,E1015,Jim Burton,Jim.Burton@example.com,Finance,Asia-Pacific,New York,TRUE,Director,CC400,Contract
+E1032,Jakob,Brouwer,E1040,Jakob Brouwer,Jakob.Brouwer@example.com,HR,Asia-Pacific,Toronto,FALSE,Analyst,CC200,Contract
+E1033,Aaron,Kennedy,E1008,Aaron Kennedy,Aaron.Kennedy@example.com,IT Security,Asia-Pacific,London,TRUE,Analyst,CC500,Full-Time
+E1034,Tyler,Nichols,E1005,Tyler Nichols,Tyler.Nichols@example.com,HR,Americas,Dallas,TRUE,Director,"CC200,CC400",Contract
+E1035,Douglas,Lee,E1009,Douglas Lee,Douglas.Lee@example.com,Operations,Europe,Sydney,TRUE,Director,CC200,Full-Time
+E1036,Allen,Flores,E1011,Allen Flores,Allen.Flores@example.com,Engineering,Europe,Sydney,TRUE,Specialist,CC200,Part-Time
+E1037,Jakob,Martinez,E1009,Jakob Martinez,Jakob.Martinez@example.com,IT Security,Americas,Dallas,FALSE,Manager,"CC200,CC300",Part-Time
+E1038,Mary,Flores,E1032,Mary Flores,Mary.Flores@example.com,Marketing,Americas,New York,TRUE,Manager,CC500,Full-Time
+E1039,Adam,Martinez,E1015,Adam Martinez,Adam.Martinez@example.com,Legal,Asia-Pacific,Berlin,TRUE,Analyst,"CC500,CC200",Contract
+E1040,Jim,Foster,E1010,Jim Foster,Jim.Foster@example.com,IT Security,Asia-Pacific,Dallas,FALSE,Director,CC100,Part-Time

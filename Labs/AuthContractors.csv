@@ -1,0 +1,51 @@
+contractorId,firstName,lastName,managerId,fullName,email,department,region,location,inactiveUser,jobtitle,costcenter,workStatus
+C2001,Sandra,Petrick,E1037,Sandra Petrick,Sandra.Petrick@example.com,Operations,Europe,Berlin,FALSE,Manager,CC500,Part-Time
+C2002,Aaron,Burton,E1005,Aaron Burton,Aaron.Burton@example.com,Finance,Europe,Dallas,FALSE,Manager,CC100,Part-Time
+C2002,Aaron,Burton,E1005,Aaron Burton,Aaron.Burton@example.com,Marketing,Asia-Pacific,Berlin,TRUE,Manager,CC500,Contract
+C2003,Tyler,Nichols,E1040,Tyler Nichols,Tyler.Nichols@example.com,IT Security,Americas,Berlin,TRUE,Director,CC300,Part-Time
+C2003,Tyler,Nichols,E1040,Tyler Nichols,Tyler.Nichols@example.com,Legal,Europe,Berlin,TRUE,Analyst,CC400,Part-Time
+C2004,Walter,Petrick,E1037,Walter Petrick,Walter.Petrick@example.com,Operations,Europe,London,FALSE,Specialist,CC100,Part-Time
+C2005,Mary,Nichols,E1001,Mary Nichols,Mary.Nichols@example.com,IT Security,Europe,London,FALSE,Engineer,CC100,Full-Time
+C2005,Mary,Nichols,E1001,Mary Nichols,Mary.Nichols@example.com,HR,Americas,New York,TRUE,Analyst,CC100,Part-Time
+C2006,James,Petrick,E1012,James Petrick,James.Petrick@example.com,IT Security,Asia-Pacific,New York,TRUE,Engineer,CC400,Full-Time
+C2007,Allen,Kennedy,E1037,Allen Kennedy,Allen.Kennedy@example.com,Operations,Europe,Berlin,TRUE,Director,CC500,Contract
+C2008,Jakob,Harrison,E1033,Jakob Harrison,Jakob.Harrison@example.com,Finance,Americas,Dallas,FALSE,Engineer,CC200,Full-Time
+C2008,Jakob,Harrison,E1033,Jakob Harrison,Jakob.Harrison@example.com,Legal,Asia-Pacific,Dallas,TRUE,Director,CC500,Contract
+C2009,Jim,Lopez,E1040,Jim Lopez,Jim.Lopez@example.com,Marketing,Asia-Pacific,Sydney,TRUE,Analyst,CC400,Contract
+C2009,Jim,Lopez,E1040,Jim Lopez,Jim.Lopez@example.com,Legal,Europe,Sydney,FALSE,Engineer,CC400,Contract
+C2010,James,Nichols,E1028,James Nichols,James.Nichols@example.com,Operations,Asia-Pacific,London,TRUE,Engineer,CC300,Part-Time
+C2011,Lauren,Nichols,E1008,Lauren Nichols,Lauren.Nichols@example.com,Finance,Americas,Toronto,TRUE,Director,CC100,Part-Time
+C2011,Lauren,Nichols,E1008,Lauren Nichols,Lauren.Nichols@example.com,Operations,Europe,Dallas,FALSE,Manager,CC300,Contract
+C2012,Aaron,Burton,E1038,Aaron Burton,Aaron.Burton@example.com,HR,Europe,Sydney,FALSE,Manager,CC500,Contract
+C2012,Aaron,Burton,E1038,Aaron Burton,Aaron.Burton@example.com,IT Security,Europe,London,FALSE,Engineer,CC400,Full-Time
+C2013,Mary,Harrison,E1035,Mary Harrison,Mary.Harrison@example.com,Engineering,Americas,Sydney,TRUE,Director,CC500,Full-Time
+C2013,Mary,Harrison,E1035,Mary Harrison,Mary.Harrison@example.com,IT Security,Americas,Dallas,TRUE,Director,CC200,Part-Time
+C2014,Mary,Harrison,E1012,Mary Harrison,Mary.Harrison@example.com,Finance,Europe,Berlin,FALSE,Specialist,CC400,Part-Time
+C2014,Mary,Harrison,E1012,Mary Harrison,Mary.Harrison@example.com,HR,Asia-Pacific,New York,FALSE,Analyst,CC300,Part-Time
+C2015,James,Lee,E1040,James Lee,James.Lee@example.com,Marketing,Americas,Berlin,TRUE,Manager,CC300,Full-Time
+C2015,James,Lee,E1040,James Lee,James.Lee@example.com,HR,Europe,London,FALSE,Director,CC200,Part-Time
+C2016,Walter,Flores,E1023,Walter Flores,Walter.Flores@example.com,Operations,Americas,London,TRUE,Engineer,CC500,Contract
+C2017,James,Flores,E1038,James Flores,James.Flores@example.com,Engineering,Europe,New York,FALSE,Director,CC100,Full-Time
+C2018,Mary,Foster,E1036,Mary Foster,Mary.Foster@example.com,Operations,Asia-Pacific,Toronto,FALSE,Director,CC500,Part-Time
+C2019,Walter,Lopez,E1022,Walter Lopez,Walter.Lopez@example.com,IT Security,Americas,Toronto,TRUE,Engineer,CC500,Full-Time
+C2020,Jim,Flores,E1019,Jim Flores,Jim.Flores@example.com,HR,Asia-Pacific,Dallas,FALSE,Manager,CC200,Full-Time
+C2020,Jim,Flores,E1019,Jim Flores,Jim.Flores@example.com,Legal,Europe,London,FALSE,Manager,CC100,Part-Time
+C2021,Jakob,Barnes,E1033,Jakob Barnes,Jakob.Barnes@example.com,HR,Americas,Sydney,TRUE,Manager,CC500,Contract
+C2022,Jakob,Johnson,E1017,Jakob Johnson,Jakob.Johnson@example.com,HR,Asia-Pacific,London,FALSE,Analyst,CC500,Full-Time
+C2022,Jakob,Johnson,E1017,Jakob Johnson,Jakob.Johnson@example.com,Finance,Europe,Dallas,TRUE,Manager,CC500,Full-Time
+C2023,Mary,Lopez,E1039,Mary Lopez,Mary.Lopez@example.com,Engineering,Asia-Pacific,Dallas,FALSE,Analyst,CC300,Full-Time
+C2023,Mary,Lopez,E1039,Mary Lopez,Mary.Lopez@example.com,Engineering,Europe,Toronto,TRUE,Analyst,CC500,Full-Time
+C2024,Jim,Foster,E1002,Jim Foster,Jim.Foster@example.com,HR,Europe,Berlin,FALSE,Specialist,CC300,Part-Time
+C2025,Sandra,Burton,E1012,Sandra Burton,Sandra.Burton@example.com,HR,Asia-Pacific,London,FALSE,Specialist,CC100,Part-Time
+C2025,Sandra,Burton,E1012,Sandra Burton,Sandra.Burton@example.com,Engineering,Asia-Pacific,New York,TRUE,Manager,CC500,Contract
+C2026,Carl,Nichols,E1020,Carl Nichols,Carl.Nichols@example.com,Marketing,Europe,New York,TRUE,Director,CC300,Part-Time
+C2026,Carl,Nichols,E1020,Carl Nichols,Carl.Nichols@example.com,Engineering,Europe,Berlin,TRUE,Specialist,CC400,Part-Time
+C2027,Mary,Brouwer,E1025,Mary Brouwer,Mary.Brouwer@example.com,IT Security,Asia-Pacific,Sydney,TRUE,Analyst,CC200,Contract
+C2028,Aaron,Foster,E1021,Aaron Foster,Aaron.Foster@example.com,Engineering,Europe,London,FALSE,Specialist,CC500,Contract
+C2028,Aaron,Foster,E1021,Aaron Foster,Aaron.Foster@example.com,IT Security,Asia-Pacific,New York,FALSE,Manager,CC200,Contract
+C2029,Tyler,Lopez,E1011,Tyler Lopez,Tyler.Lopez@example.com,Engineering,Asia-Pacific,Sydney,FALSE,Engineer,CC200,Part-Time
+C2030,Sandra,Burton,E1037,Sandra Burton,Sandra.Burton@example.com,Finance,Europe,New York,TRUE,Analyst,CC300,Contract
+C2030,Sandra,Burton,E1037,Sandra Burton,Sandra.Burton@example.com,Finance,Europe,Dallas,TRUE,Manager,CC200,Full-Time
+C2031,Thomas,Smith,E1034,Thomas Smith,Thomas.Smith@example.com,HR,Europe,Toronto,TRUE,Manager,CC200,Contract
+C2032,Douglas,Burton,E1024,Douglas Burton,Douglas.Burton@example.com,Operations,Americas,Dallas,TRUE,Director,CC100,Contract
+C2032,Douglas,Burton,E1024,Douglas Burton,Douglas.Burton@example.com,Marketing,Asia-Pacific,New York,TRUE,Analyst,CC300,Full-Time

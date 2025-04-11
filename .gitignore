@@ -7,7 +7,7 @@ identityiq-build/
 identityiq-war-base/identityiq.war
 identityiq-war-base/WEB-INF/lib-connectors/
 identityiq-war-base/WEB-INF/lib/*.jar
-
+identityiq-war-base/
 # 🧪 IDE and environment files
 .idea/
 *.iml
