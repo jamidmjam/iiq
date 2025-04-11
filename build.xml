@@ -1,0 +1,53 @@
+<project name="SailPointBaseBuild" default="build-war" basedir=".">
+
+    <!-- Load build properties -->
+    <property file="build.properties" />
+
+    <!-- Define default paths -->
+    <property name="base.war.dir" value="identityiq-war-base" />
+    <property name="config.dir" value="identityiq-config" />
+    <property name="build.dir" value="identityiq-build" />
+    <property name="war.temp.dir" value="${build.dir}/war-temp" />
+    <property name="classes.dir" value="${build.dir}/classes" />
+    <property name="dist.dir" value="${build.dir}/dist" />
+    <property name="source.dir" value="identityiq-source/src" />
+
+    <!-- Clean old build files -->
+    <target name="clean">
+        <echo message="Cleaning previous build directories..." />
+        <delete dir="${war.temp.dir}" />
+        <delete dir="${dist.dir}" />
+        <mkdir dir="${war.temp.dir}" />
+        <mkdir dir="${dist.dir}" />
+    </target>
+
+    <!-- Copy exploded WAR into war-temp -->
+    <target name="copy-base-war" depends="clean">
+        <echo message="Copying base WAR contents..." />
+        <copy todir="${war.temp.dir}">
+            <fileset dir="${base.war.dir}" />
+        </copy>
+    </target>
+
+    <!-- Overlay configuration files -->
+    <target name="overlay-config" depends="copy-base-war">
+        <echo message="Overlaying configuration files..." />
+        <copy todir="${war.temp.dir}/WEB-INF/config">
+            <fileset dir="${config.dir}/applications" />
+            <fileset dir="${config.dir}/rules" />
+            <fileset dir="${config.dir}/roles" />
+            <fileset dir="${config.dir}/workflows" />
+        </copy>
+    </target>
+
+    <!-- Build the WAR file -->
+    <target name="build-war" depends="overlay-config">
+        <echo message="Building new WAR file..." />
+        <war destfile="${dist.dir}/identityiq.war" webxml="${war.temp.dir}/WEB-INF/web.xml">
+            <fileset dir="${war.temp.dir}" />
+        </war>
+        <echo message="WAR build complete: ${dist.dir}/identityiq.war" />
+    </target>
+
+</project>
+
