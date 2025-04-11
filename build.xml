@@ -1,4 +1,4 @@
-<project name="SailPointBaseBuild" default="build-war" basedir=".">
+<project name="SailPointBaseBuild" default="full-deploy" basedir=".">
 
     <!-- Load build properties -->
     <property file="build.properties" />
@@ -11,6 +11,7 @@
     <property name="classes.dir" value="${build.dir}/classes" />
     <property name="dist.dir" value="${build.dir}/dist" />
     <property name="source.dir" value="identityiq-source/src" />
+    <property name="tomcat.webapps.dir" value="/opt/sailpoint/tomcat/webapps" />
 
     <!-- Clean old build files -->
     <target name="clean">
@@ -47,6 +48,73 @@
             <fileset dir="${war.temp.dir}" />
         </war>
         <echo message="WAR build complete: ${dist.dir}/identityiq.war" />
+    </target>
+
+    <!-- Stop Tomcat -->
+    <target name="stop-tomcat">
+        <echo message="Stopping Tomcat..." />
+        <exec executable="/opt/sailpoint/tomcat/bin/shutdown.sh" failonerror="false" />
+    </target>
+
+    <!-- Clean old deployment from Tomcat -->
+    <target name="clean-tomcat">
+        <echo message="Removing old deployment from Tomcat webapps..." />
+        <delete file="${tomcat.webapps.dir}/identityiq.war" failonerror="false"/>
+        <delete dir="${tomcat.webapps.dir}/identityiq" failonerror="false"/>
+    </target>
+
+    <!-- Deploy WAR to Tomcat -->
+    <target name="deploy-war" depends="build-war, clean-tomcat">
+        <echo message="Deploying new WAR to Tomcat..." />
+        <copy file="${dist.dir}/identityiq.war"
+              tofile="${tomcat.webapps.dir}/identityiq.war" />
+    </target>
+
+    <!-- Start Tomcat -->
+    <target name="start-tomcat">
+        <echo message="Starting Tomcat..." />
+        <exec executable="/opt/sailpoint/tomcat/bin/startup.sh" />
+    </target>
+
+    <!-- Wait for Tomcat to be ready -->
+    <target name="wait-for-tomcat" depends="start-tomcat">
+        <echo message="Waiting for IdentityIQ to become available..." />
+        <exec executable="bash">
+            <arg value="-c"/>
+            <arg value='echo "Checking IdentityIQ readiness..."; for i in {1..30}; do if curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/identityiq/login.jsf | grep -q "200"; then echo "✅ IdentityIQ is up!"; exit 0; else echo "Waiting... ($i)"; sleep 5; fi; done; echo "❌ Timeout: IdentityIQ didn’t start within expected time."; exit 1;'/>
+        </exec>
+    </target>
+
+    <!-- Import IIQ config files and move them after import -->
+    <target name="import-config">
+        <echo message="Importing configuration files into IdentityIQ..." />
+
+        <apply executable="${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq" parallel="false" failonerror="true">
+            <arg value="console"/>
+            <arg value="-import"/>
+            <fileset dir="${config.dir}/applications" includes="*.xml"/>
+            <fileset dir="${config.dir}/rules" includes="*.xml"/>
+            <fileset dir="${config.dir}/roles" includes="*.xml"/>
+            <fileset dir="${config.dir}/workflows" includes="*.xml"/>
+        </apply>
+
+        <move todir="${config.dir}/Deployed/applications" includeemptydirs="false">
+            <fileset dir="${config.dir}/applications" includes="*.xml"/>
+        </move>
+        <move todir="${config.dir}/Deployed/rules" includeemptydirs="false">
+            <fileset dir="${config.dir}/rules" includes="*.xml"/>
+        </move>
+        <move todir="${config.dir}/Deployed/roles" includeemptydirs="false">
+            <fileset dir="${config.dir}/roles" includes="*.xml"/>
+        </move>
+        <move todir="${config.dir}/Deployed/workflows" includeemptydirs="false">
+            <fileset dir="${config.dir}/workflows" includes="*.xml"/>
+        </move>
+    </target>
+
+    <!-- Full deploy: stop tomcat, build + deploy, start, wait, import -->
+    <target name="full-deploy" depends="stop-tomcat, deploy-war, wait-for-tomcat, import-config">
+        <echo message="✅ Full deployment and configuration import completed." />
     </target>
 
 </project>
