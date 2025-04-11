@@ -34,10 +34,10 @@
     <target name="overlay-config" depends="copy-base-war">
         <echo message="Overlaying configuration files..." />
         <copy todir="${war.temp.dir}/WEB-INF/config">
-            <fileset dir="${config.dir}/applications" />
-            <fileset dir="${config.dir}/rules" />
-            <fileset dir="${config.dir}/roles" />
-            <fileset dir="${config.dir}/workflows" />
+            <fileset dir="${config.dir}/applications" excludes="Deployed/**" />
+            <fileset dir="${config.dir}/rules" excludes="Deployed/**" />
+            <fileset dir="${config.dir}/roles" excludes="Deployed/**" />
+            <fileset dir="${config.dir}/workflows" excludes="Deployed/**" />
         </copy>
     </target>
 
@@ -81,7 +81,7 @@
         <echo message="Waiting for IdentityIQ to become available..." />
         <exec executable="bash">
             <arg value="-c"/>
-            <arg value='echo "Checking IdentityIQ readiness..."; for i in {1..30}; do if curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/identityiq/login.jsf | grep -q "200"; then echo "✅ IdentityIQ is up!"; exit 0; else echo "Waiting... ($i)"; sleep 5; fi; done; echo "❌ Timeout: IdentityIQ didn’t start within expected time."; exit 1;'/>
+            <arg value='echo "Checking IdentityIQ readiness..."; for i in {1..30}; do if [ -f "${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq" ]; then chmod +x "${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq"; curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/identityiq/login.jsf | grep -q "200" &amp;&amp; echo "✅ IdentityIQ is up!" &amp;&amp; exit 0; fi; echo "Waiting... ($i)"; sleep 5; done; echo "❌ Timeout: IdentityIQ didn’t start within expected time."; exit 1;' />
         </exec>
     </target>
 
@@ -89,26 +89,30 @@
     <target name="import-config">
         <echo message="Importing configuration files into IdentityIQ..." />
 
-        <apply executable="${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq" parallel="false" failonerror="true">
-            <arg value="console"/>
-            <arg value="-import"/>
-            <fileset dir="${config.dir}/applications" includes="*.xml"/>
-            <fileset dir="${config.dir}/rules" includes="*.xml"/>
-            <fileset dir="${config.dir}/roles" includes="*.xml"/>
-            <fileset dir="${config.dir}/workflows" includes="*.xml"/>
-        </apply>
+        <!-- Dynamically generate import script and feed to iiq console -->
+        <exec executable="bash">
+            <arg value="-c"/>
+            <arg value='
+            TMPFILE=$(mktemp);
+            for f in ${PWD}/${config.dir}/applications/*.xml ${PWD}/${config.dir}/rules/*.xml ${PWD}/${config.dir}/roles/*.xml ${PWD}/${config.dir}/workflows/*.xml; do
+                [ -f "$f" ] &amp;&amp; echo "import $f" >> $TMPFILE;
+            done;
+            cat $TMPFILE | ${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq console;
+            rm -f $TMPFILE;
+            '/>
+        </exec>
 
         <move todir="${config.dir}/Deployed/applications" includeemptydirs="false">
-            <fileset dir="${config.dir}/applications" includes="*.xml"/>
+            <fileset dir="${config.dir}/applications" includes="*.xml" />
         </move>
         <move todir="${config.dir}/Deployed/rules" includeemptydirs="false">
-            <fileset dir="${config.dir}/rules" includes="*.xml"/>
+            <fileset dir="${config.dir}/rules" includes="*.xml" />
         </move>
         <move todir="${config.dir}/Deployed/roles" includeemptydirs="false">
-            <fileset dir="${config.dir}/roles" includes="*.xml"/>
+            <fileset dir="${config.dir}/roles" includes="*.xml" />
         </move>
         <move todir="${config.dir}/Deployed/workflows" includeemptydirs="false">
-            <fileset dir="${config.dir}/workflows" includes="*.xml"/>
+            <fileset dir="${config.dir}/workflows" includes="*.xml" />
         </move>
     </target>
 
