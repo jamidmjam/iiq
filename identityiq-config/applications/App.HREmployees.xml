@@ -83,6 +83,7 @@
         </value>
       </entry>
       <entry key="templateApplication" value="DelimitedFile Template"/>
+      <entry key="identityCreationRule" value="SetNativePasswordRule"/>
     </Map>
   </Attributes>
   <Owner>
