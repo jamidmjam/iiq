@@ -21,3 +21,5 @@ Thumbs.db
 # 🛑 Optional: SailPoint internal cache/output
 sailpoint-object-export.xml
 
+# Ignore the Deployed folder which holds older versions of the config files
+identity-config/Deployed/

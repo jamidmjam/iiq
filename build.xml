@@ -85,35 +85,33 @@
         </exec>
     </target>
 
-    <!-- Import IIQ config files and move them after import -->
+    <!-- Import IIQ config files and copy them after import with timestamp -->
     <target name="import-config">
-        <echo message="Importing configuration files into IdentityIQ..." />
+        <echo message="Importing configuration files into IdentityIQ and copying to Deployed with timestamp..." />
 
-        <!-- Dynamically generate import script and feed to iiq console -->
         <exec executable="bash">
             <arg value="-c"/>
             <arg value='
+            TIMESTAMP=$(date +"%Y%m%d_%H%M%S");
             TMPFILE=$(mktemp);
-            for f in ${PWD}/${config.dir}/applications/*.xml ${PWD}/${config.dir}/rules/*.xml ${PWD}/${config.dir}/roles/*.xml ${PWD}/${config.dir}/workflows/*.xml; do
-                [ -f "$f" ] &amp;&amp; echo "import $f" >> $TMPFILE;
+
+            for TYPE in applications rules roles workflows; do
+                SRC_DIR="${PWD}/${config.dir}/$TYPE";
+                DEST_DIR="${PWD}/${config.dir}/Deployed/$TYPE";
+                mkdir -p "$DEST_DIR";
+
+                for FILE in "$SRC_DIR"/*.xml; do
+                    [ -f "$FILE" ] || continue;
+                    echo "import $FILE" >> $TMPFILE;
+                    BASENAME=$(basename "$FILE" .xml);
+                    cp "$FILE" "$DEST_DIR/${BASENAME}_${TIMESTAMP}.xml";
+                done;
             done;
+
             cat $TMPFILE | ${tomcat.webapps.dir}/identityiq/WEB-INF/bin/iiq console;
             rm -f $TMPFILE;
             '/>
         </exec>
-
-        <move todir="${config.dir}/Deployed/applications" includeemptydirs="false">
-            <fileset dir="${config.dir}/applications" includes="*.xml" />
-        </move>
-        <move todir="${config.dir}/Deployed/rules" includeemptydirs="false">
-            <fileset dir="${config.dir}/rules" includes="*.xml" />
-        </move>
-        <move todir="${config.dir}/Deployed/roles" includeemptydirs="false">
-            <fileset dir="${config.dir}/roles" includes="*.xml" />
-        </move>
-        <move todir="${config.dir}/Deployed/workflows" includeemptydirs="false">
-            <fileset dir="${config.dir}/workflows" includes="*.xml" />
-        </move>
     </target>
 
     <!-- Full deploy: stop tomcat, build + deploy, start, wait, import -->
