@@ -86,6 +86,9 @@
       <entry key="identityCreationRule" value="SetNativePasswordRule"/>
     </Map>
   </Attributes>
+  <CreationRule>
+    <Reference class="sailpoint.object.Rule" name="SetNativePasswordRule"/>
+  </CreationRule>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="spadmin"/>
   </Owner>
