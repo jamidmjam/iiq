@@ -1,0 +1,38 @@
+<Rule name="TRNG-GroupOwner-Department" type="GroupOwner" language="beanshell">
+  <Description>
+    Assigns ownership of a department-based group to the first identity
+    found in that department with a title containing "Manager".
+  </Description>
+
+  <Source>
+    <![CDATA[
+      import sailpoint.object.*;
+      import sailpoint.api.*;
+
+      // Get the current group (e.g., Department = "Finance")
+      Group group = (Group) ruleContext.get("group");
+      String department = group.getValue();
+
+      // Return null if department is missing
+      if (department == null || department.isEmpty()) {
+          return null;
+      }
+
+      // Build a filter: department equals group value AND title contains "Manager"
+      Filter filter = Filter.and(
+        Filter.eq("department", department),
+        Filter.like("title", "%Manager%")
+      );
+
+      // Query identities that match the filter
+      List results = context.getObjects(Identity.class, filter);
+
+      if (results != null && results.size() > 0) {
+          return results.get(0);  // Return the first match
+      }
+
+      // Fallback: no owner found
+      return null;
+    ]]>
+  </Source>
+</Rule>
