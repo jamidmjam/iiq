@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Rule name="TRNG-GroupOwner-Department" type="GroupOwner" language="beanshell">
   <Description>
     Assigns ownership of a department-based group to the first identity
