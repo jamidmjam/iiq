@@ -2,39 +2,46 @@
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Rule name="TRNG-GroupOwner-Department" type="GroupOwner" language="beanshell">
   <Description>
-    Assigns ownership of a department-based group to the first identity
-    found in that department with a title containing "Manager".
+    Assigns group ownership based on first manager found in the department.
+    Compatible with IIQ BeanShell engine.
   </Description>
-
   <Source>
     <![CDATA[
-      import sailpoint.object.*;
-      import sailpoint.api.*;
+      import sailpoint.object.Identity;
+      import sailpoint.object.Filter;
 
-      // Get the current group (e.g., Department = "Finance")
-      Group group = (Group) ruleContext.get("group");
-      String department = group.getValue();
+      // Get the group object from context
+      Object groupObj = ruleContext.get("group");
 
-      // Return null if department is missing
+      // Use reflection-safe getter for group value
+      String department = null;
+      if (groupObj != null) {
+          try {
+              department = groupObj.getClass().getMethod("getValue", (Class[]) null).invoke(groupObj, (Object[]) null);
+          } catch (Exception e) {
+              log.error("Could not retrieve group value from group object: " + e);
+          }
+      }
+
       if (department == null || department.isEmpty()) {
           return null;
       }
 
-      // Build a filter: department equals group value AND title contains "Manager"
+      // Build filter to find managers in this department
       Filter filter = Filter.and(
         Filter.eq("department", department),
         Filter.like("title", "%Manager%")
       );
 
-      // Query identities that match the filter
+      // Query the identities
       List results = context.getObjects(Identity.class, filter);
 
       if (results != null && results.size() > 0) {
-          return results.get(0);  // Return the first match
+          return results.get(0);
       }
 
-      // Fallback: no owner found
       return null;
     ]]>
   </Source>
 </Rule>
+
