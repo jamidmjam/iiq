@@ -2,24 +2,24 @@
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Rule name="TRNG-GroupOwner-Department" type="GroupOwner" language="beanshell">
   <Description>
-    Assigns group ownership based on first manager found in the department.
-    Compatible with IIQ BeanShell engine.
+    Assigns group ownership to the first manager found in the matching department.
+    Uses args map to access input and avoids direct use of Group class.
   </Description>
   <Source>
     <![CDATA[
       import sailpoint.object.Identity;
       import sailpoint.object.Filter;
 
-      // Get the group object from context
-      Object groupObj = ruleContext.get("group");
+      // Get the group object from the args map
+      Object groupObj = args.get("group");
 
-      // Use reflection-safe getter for group value
+      // Safely extract department value via reflection
       String department = null;
       if (groupObj != null) {
           try {
               department = groupObj.getClass().getMethod("getValue", (Class[]) null).invoke(groupObj, (Object[]) null);
           } catch (Exception e) {
-              log.error("Could not retrieve group value from group object: " + e);
+              log.error("Could not get group value from group object: " + e);
           }
       }
 
@@ -27,20 +27,20 @@
           return null;
       }
 
-      // Build filter to find managers in this department
+      // Create filter to find manager in the department
       Filter filter = Filter.and(
         Filter.eq("department", department),
         Filter.like("title", "%Manager%")
       );
 
-      // Query the identities
+      // Search for matching identities
       List results = context.getObjects(Identity.class, filter);
 
       if (results != null && results.size() > 0) {
-          return results.get(0);
+          return results.get(0);  // Assign first matching manager
       }
 
-      return null;
+      return null;  // No match, leave group owner blank
     ]]>
   </Source>
 </Rule>
