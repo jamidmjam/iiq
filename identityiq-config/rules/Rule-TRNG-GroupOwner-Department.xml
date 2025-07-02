@@ -1,47 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule name="TRNG-GroupOwner-Department" type="GroupOwner" language="beanshell">
-  <Description>
-    Assigns group ownership to the first manager found in the matching department.
-    Uses args map to access input and avoids direct use of Group class.
-  </Description>
+<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupFactory">
+  <Description>Assigns owner to department group based on first manager found in that department</Description>
   <Source>
     <![CDATA[
-      import sailpoint.object.Identity;
-      import sailpoint.object.Filter;
+    import sailpoint.object.Identity;
+    import sailpoint.object.Filter;
+    import sailpoint.api.SailPointContext;
+    import sailpoint.object.QueryOptions;
 
-      // Get the group object from the args map
-      Object groupObj = args.get("group");
+    String department = (String) args.get("group");
 
-      // Safely extract department value via reflection
-      String department = null;
-      if (groupObj != null) {
-          try {
-              department = groupObj.getClass().getMethod("getValue", (Class[]) null).invoke(groupObj, (Object[]) null);
-          } catch (Exception e) {
-              log.error("Could not get group value from group object: " + e);
-          }
-      }
+    if (department != null) {
+        Filter deptFilter = Filter.eq("department", department);
+        Filter mgrFilter = Filter.eq("title", "Manager");
+        Filter combined = Filter.and(deptFilter, mgrFilter);
 
-      if (department == null || department.isEmpty()) {
-          return null;
-      }
+        QueryOptions qo = new QueryOptions();
+        qo.addFilter(combined);
 
-      // Create filter to find manager in the department
-      Filter filter = Filter.and(
-        Filter.eq("department", department),
-        Filter.like("title", "%Manager%")
-      );
+        List identities = context.getObjects(Identity.class, qo);
 
-      // Search for matching identities
-      List results = context.getObjects(Identity.class, filter);
+        if (identities != null && identities.size() > 0) {
+            Identity owner = (Identity) identities.get(0);
+            group.setOwner(owner);
+            log.info("Group owner for department [" + department + "] set to: " + owner.getDisplayName());
+        } else {
+            log.warn("No manager found in department: " + department);
+        }
+    } else {
+        log.error("No department value provided for group owner assignment.");
+    }
 
-      if (results != null && results.size() > 0) {
-          return results.get(0);  // Assign first matching manager
-      }
-
-      return null;  // No match, leave group owner blank
+    return group;
     ]]>
   </Source>
 </Rule>
-
