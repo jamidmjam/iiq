@@ -1,26 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupFactory">
-  <Description>Assigns owner to department group based on first manager found in that department</Description>
+<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupOwner">
+  <Description>
+    Assigns owner to a department group by finding the first Identity in that department with the title "Manager".
+  </Description>
   <Source>
     <![CDATA[
     import sailpoint.object.Identity;
     import sailpoint.object.Filter;
     import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
+    import sailpoint.object.Group;
 
-    String department = (String) args.get("group");
+    // Get the group object passed into the rule
+    Group group = (Group) args.get("group");
 
-    if (department != null) {
+    if (group != null) {
+
+        // Assume the group name is the department name (e.g., "Finance", "IT")
+        String department = group.getName();
+
+        // Build filter: department equals group name AND title equals "Manager"
         Filter deptFilter = Filter.eq("department", department);
         Filter mgrFilter = Filter.eq("title", "Manager");
-        Filter combined = Filter.and(deptFilter, mgrFilter);
+        Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
 
+        // Create query options with combined filter
         QueryOptions qo = new QueryOptions();
-        qo.addFilter(combined);
+        qo.addFilter(combinedFilter);
 
+        // Query Identity objects matching department + manager title
         List identities = context.getObjects(Identity.class, qo);
 
+        // If at least one match, set first Identity as owner
         if (identities != null && identities.size() > 0) {
             Identity owner = (Identity) identities.get(0);
             group.setOwner(owner);
@@ -29,10 +41,12 @@
             log.warn("No manager found in department: " + department);
         }
     } else {
-        log.error("No department value provided for group owner assignment.");
+        log.error("Group object is null - cannot assign owner.");
     }
 
+    // Return the group with assigned owner
     return group;
     ]]>
   </Source>
 </Rule>
+
