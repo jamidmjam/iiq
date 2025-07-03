@@ -10,40 +10,38 @@
     import sailpoint.object.Filter;
     import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
-    import sailpoint.object.IdentityGroup;
 
-    // Get the IdentityGroup object passed into the rule
-    IdentityGroup group = (IdentityGroup) args.get("group");
+    // Safely cast without importing Group class
+    sailpoint.object.Group group = (sailpoint.object.Group) args.get("group");
 
     if (group != null) {
 
-        // Assume the group name is the department name
+        // Use group name as department name
         String department = group.getName();
 
-        // Filter: department equals group name AND title equals "Manager"
+        // Find any Identity with this department and title 'Manager'
         Filter deptFilter = Filter.eq("department", department);
         Filter mgrFilter = Filter.eq("title", "Manager");
         Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
 
-        // Create query options with combined filter
         QueryOptions qo = new QueryOptions();
         qo.addFilter(combinedFilter);
 
-        // Query Identity objects matching department + manager title
         List identities = context.getObjects(Identity.class, qo);
 
         if (identities != null && identities.size() > 0) {
             Identity owner = (Identity) identities.get(0);
             group.setOwner(owner);
-            log.info("Group owner for department [" + department + "] set to: " + owner.getDisplayName());
+            log.info("Owner for group [" + department + "] set to: " + owner.getDisplayName());
         } else {
             log.warn("No manager found in department: " + department);
         }
     } else {
-        log.error("Group object is null - cannot assign owner.");
+        log.error("Group object is null.");
     }
 
     return group;
     ]]>
   </Source>
 </Rule>
+
