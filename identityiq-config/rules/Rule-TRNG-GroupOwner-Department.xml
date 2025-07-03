@@ -1,71 +1,49 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule name="Set Department Group Owner on Refresh" type="GroupRefresh">
+<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupOwner">
   <Description>
-    This rule is executed during a group refresh task. For groups under "Departments"
-    that do not have an owner, it finds the first user whose department matches the
-    group's name and whose title contains 'Manager', and sets that user as the group owner.
+    Assigns owner to a department group by finding the first Identity in that department with the title "Manager".
   </Description>
   <Source>
     <![CDATA[
-      import sailpoint.object.Identity;
-      import sailpoint.object.Filter;
-      import sailpoint.object.QueryOptions;
-      import sailpoint.tools.GeneralException;
-      import java.util.List;
+    import sailpoint.object.Identity;
+    import sailpoint.object.Filter;
+    import sailpoint.api.SailPointContext;
+    import sailpoint.object.QueryOptions;
+    import sailpoint.object.IdentityGroup;
 
-      // Only run this logic for subgroups of "Departments"
-      if (group != null && group.getParent() != null && "Departments".equals(group.getParent().getDisplayableName())) {
+    // Get the IdentityGroup object passed into the rule
+    IdentityGroup group = (IdentityGroup) args.get("group");
 
-        // Check if the group already has an owner. If so, do nothing.
-        if (group.getOwner() != null) {
-          log.info("Group '" + group.getDisplayableName() + "' already has an owner. Skipping owner assignment.");
-          return;
-        }
+    if (group != null) {
 
-        log.info("Starting 'Set Department Group Owner on Refresh' rule for group: " + group.getDisplayableName());
+        // Assume the group name is the department name
+        String department = group.getName();
 
-        try {
-          // Get the name of the group. This should match the department name.
-          String departmentName = group.getDisplayableName();
-          if (departmentName == null || departmentName.isEmpty()) {
-            log.warn("Group name is null or empty. Cannot determine department to query.");
-            return;
-          }
+        // Filter: department equals group name AND title equals "Manager"
+        Filter deptFilter = Filter.eq("department", department);
+        Filter mgrFilter = Filter.eq("title", "Manager");
+        Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
 
-          log.debug("Searching for a manager in department: " + departmentName);
+        // Create query options with combined filter
+        QueryOptions qo = new QueryOptions();
+        qo.addFilter(combinedFilter);
 
-          // Create a query to find users who are managers in the specified department.
-          QueryOptions qo = new QueryOptions();
+        // Query Identity objects matching department + manager title
+        List identities = context.getObjects(Identity.class, qo);
 
-          // Filter 1: Identity's 'department' attribute must match the group name.
-          Filter departmentFilter = Filter.eq("department", departmentName);
-
-          // Filter 2: Identity's 'title' attribute must contain the word "Manager".
-          Filter managerFilter = Filter.like("title", "Manager", Filter.MatchMode.ANYWHERE);
-
-          // Combine the filters with an AND condition.
-          qo.addFilter(Filter.and(departmentFilter, managerFilter));
-
-          // We only need the first result.
-          qo.setResultLimit(1);
-
-          List<Identity> managers = context.getObjects(Identity.class, qo);
-
-          if (managers != null && !managers.isEmpty()) {
-            Identity owner = managers.get(0);
+        if (identities != null && identities.size() > 0) {
+            Identity owner = (Identity) identities.get(0);
             group.setOwner(owner);
-            log.info("Successfully set '" + owner.getDisplayableName() + "' as the owner for group '" + group.getDisplayableName() + "'.");
-          } else {
-            log.warn("No manager found for department '" + departmentName + "'. Owner for group '" + group.getDisplayableName() + "' was not set.");
-          }
-
-        } catch (GeneralException e) {
-          log.error("Error in 'Set Department Group Owner on Refresh' rule: " + e.getMessage(), e);
+            log.info("Group owner for department [" + department + "] set to: " + owner.getDisplayName());
+        } else {
+            log.warn("No manager found in department: " + department);
         }
+    } else {
+        log.error("Group object is null - cannot assign owner.");
+    }
 
-        log.info("Finished 'Set Department Group Owner on Refresh' rule for group: " + group.getDisplayableName());
-      }
+    return group;
     ]]>
   </Source>
 </Rule>
