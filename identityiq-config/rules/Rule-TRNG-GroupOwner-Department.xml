@@ -1,52 +1,71 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupOwner">
+<Rule name="Set Department Group Owner on Refresh" type="GroupRefresh">
   <Description>
-    Assigns owner to a department group by finding the first Identity in that department with the title "Manager".
+    This rule is executed during a group refresh task. For groups under "Departments"
+    that do not have an owner, it finds the first user whose department matches the
+    group's name and whose title contains 'Manager', and sets that user as the group owner.
   </Description>
   <Source>
     <![CDATA[
-    import sailpoint.object.Identity;
-    import sailpoint.object.Filter;
-    import sailpoint.api.SailPointContext;
-    import sailpoint.object.QueryOptions;
-    import sailpoint.object.Group;
+      import sailpoint.object.Identity;
+      import sailpoint.object.Filter;
+      import sailpoint.object.QueryOptions;
+      import sailpoint.tools.GeneralException;
+      import java.util.List;
 
-    // Get the group object passed into the rule
-    Group group = (Group) args.get("group");
+      // Only run this logic for subgroups of "Departments"
+      if (group != null && group.getParent() != null && "Departments".equals(group.getParent().getDisplayableName())) {
 
-    if (group != null) {
-
-        // Assume the group name is the department name (e.g., "Finance", "IT")
-        String department = group.getName();
-
-        // Build filter: department equals group name AND title equals "Manager"
-        Filter deptFilter = Filter.eq("department", department);
-        Filter mgrFilter = Filter.eq("title", "Manager");
-        Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
-
-        // Create query options with combined filter
-        QueryOptions qo = new QueryOptions();
-        qo.addFilter(combinedFilter);
-
-        // Query Identity objects matching department + manager title
-        List identities = context.getObjects(Identity.class, qo);
-
-        // If at least one match, set first Identity as owner
-        if (identities != null && identities.size() > 0) {
-            Identity owner = (Identity) identities.get(0);
-            group.setOwner(owner);
-            log.info("Group owner for department [" + department + "] set to: " + owner.getDisplayName());
-        } else {
-            log.warn("No manager found in department: " + department);
+        // Check if the group already has an owner. If so, do nothing.
+        if (group.getOwner() != null) {
+          log.info("Group '" + group.getDisplayableName() + "' already has an owner. Skipping owner assignment.");
+          return;
         }
-    } else {
-        log.error("Group object is null - cannot assign owner.");
-    }
 
-    // Return the group with assigned owner
-    return group;
+        log.info("Starting 'Set Department Group Owner on Refresh' rule for group: " + group.getDisplayableName());
+
+        try {
+          // Get the name of the group. This should match the department name.
+          String departmentName = group.getDisplayableName();
+          if (departmentName == null || departmentName.isEmpty()) {
+            log.warn("Group name is null or empty. Cannot determine department to query.");
+            return;
+          }
+
+          log.debug("Searching for a manager in department: " + departmentName);
+
+          // Create a query to find users who are managers in the specified department.
+          QueryOptions qo = new QueryOptions();
+
+          // Filter 1: Identity's 'department' attribute must match the group name.
+          Filter departmentFilter = Filter.eq("department", departmentName);
+
+          // Filter 2: Identity's 'title' attribute must contain the word "Manager".
+          Filter managerFilter = Filter.like("title", "Manager", Filter.MatchMode.ANYWHERE);
+
+          // Combine the filters with an AND condition.
+          qo.addFilter(Filter.and(departmentFilter, managerFilter));
+
+          // We only need the first result.
+          qo.setResultLimit(1);
+
+          List<Identity> managers = context.getObjects(Identity.class, qo);
+
+          if (managers != null && !managers.isEmpty()) {
+            Identity owner = managers.get(0);
+            group.setOwner(owner);
+            log.info("Successfully set '" + owner.getDisplayableName() + "' as the owner for group '" + group.getDisplayableName() + "'.");
+          } else {
+            log.warn("No manager found for department '" + departmentName + "'. Owner for group '" + group.getDisplayableName() + "' was not set.");
+          }
+
+        } catch (GeneralException e) {
+          log.error("Error in 'Set Department Group Owner on Refresh' rule: " + e.getMessage(), e);
+        }
+
+        log.info("Finished 'Set Department Group Owner on Refresh' rule for group: " + group.getDisplayableName());
+      }
     ]]>
   </Source>
 </Rule>
-
