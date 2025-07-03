@@ -11,15 +11,11 @@
     import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
 
-    // Safely cast without importing Group class
-    sailpoint.object.Group group = (sailpoint.object.Group) args.get("group");
+    // Extract group name directly from args
+    String department = args.get("group").toString();
 
-    if (group != null) {
+    if (department != null) {
 
-        // Use group name as department name
-        String department = group.getName();
-
-        // Find any Identity with this department and title 'Manager'
         Filter deptFilter = Filter.eq("department", department);
         Filter mgrFilter = Filter.eq("title", "Manager");
         Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
@@ -31,16 +27,16 @@
 
         if (identities != null && identities.size() > 0) {
             Identity owner = (Identity) identities.get(0);
-            group.setOwner(owner);
-            log.info("Owner for group [" + department + "] set to: " + owner.getDisplayName());
+            log.info("Assigning owner for department [" + department + "] to: " + owner.getDisplayName());
+            return owner;
         } else {
             log.warn("No manager found in department: " + department);
         }
     } else {
-        log.error("Group object is null.");
+        log.error("No department (group) provided.");
     }
 
-    return group;
+    return null;
     ]]>
   </Source>
 </Rule>
