@@ -11,8 +11,8 @@
     import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
 
-    // Extract group name directly from args
-    String department = args.get("group").toString();
+    // The group name (e.g. "Finance") is passed directly as a variable
+    String department = group;  // Not args.get("group") — just plain 'group'
 
     if (department != null) {
 
@@ -27,13 +27,13 @@
 
         if (identities != null && identities.size() > 0) {
             Identity owner = (Identity) identities.get(0);
-            log.info("Assigning owner for department [" + department + "] to: " + owner.getDisplayName());
+            log.info("Assigning owner for group [" + department + "] to: " + owner.getDisplayName());
             return owner;
         } else {
             log.warn("No manager found in department: " + department);
         }
     } else {
-        log.error("No department (group) provided.");
+        log.error("Group variable is null.");
     }
 
     return null;
