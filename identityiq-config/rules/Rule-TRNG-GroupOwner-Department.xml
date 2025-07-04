@@ -1,43 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule language="beanshell" name="TRNG-GroupOwner-Department" type="GroupOwner">
+<Rule language="beanshell" name="Group Owner - Manager of Sub-Group" type="GroupOwner">
   <Description>
-    Assigns owner to a department group by finding the first Identity in that department with the title "Manager".
+    Set the owner of each subgroup to the first Identity in that subgroup with the attribute "isManager" == true. If no managers are found, default to spadmin.
   </Description>
+  <Signature returnType="Object">
+    <Inputs>
+      <Argument name="log">
+        <Description>The log object associated with the SailPointContext.</Description>
+      </Argument>
+      <Argument name="context">
+        <Description>A sailpoint.api.SailPointContext object that can be used to query the database if necessary.</Description>
+      </Argument>
+      <Argument name="factory">
+        <Description>The GroupFactory that generated the populations.</Description>
+      </Argument>
+      <Argument name="group">
+        <Description>One GroupDefinition from the factory.</Description>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="owner">
+        <Description>The group owner. The name or id of an Identity or the Identity object itself.</Description>
+      </Argument>
+    </Returns>
+  </Signature>
   <Source>
     <![CDATA[
-    import sailpoint.object.Identity;
-    import sailpoint.object.Filter;
-    import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
+    import sailpoint.object.Identity;
 
-    // 'group' is a subgroup object; get the department name from its reference name
-    String department = group.getReferenceName();
+    // Create query options based on the group filter (e.g., department = "Finance")
+    QueryOptions qo = new QueryOptions();
+    qo.addFilter(group.getFilter());
 
-    if (department != null) {
+    // Search for all members of the group
+    Iterator identities = context.search(Identity.class, qo);
 
-        Filter deptFilter = Filter.eq("department", department);
-        Filter mgrFilter = Filter.eq("title", "Manager");
-        Filter combinedFilter = Filter.and(deptFilter, mgrFilter);
+    Identity emp = null;
+    Identity owner = null;
 
-        QueryOptions qo = new QueryOptions();
-        qo.addFilter(combinedFilter);
+    while (identities.hasNext()) {
+      emp = (Identity) identities.next();
 
-        List identities = context.getObjects(Identity.class, qo);
+      Object isManagerAttr = emp.getAttribute("isManager");
 
-        if (identities != null && identities.size() > 0) {
-            Identity owner = (Identity) identities.get(0);
-            group.setOwner(owner);
-            log.info("Assigned owner for department [" + department + "] to: " + owner.getDisplayName());
-        } else {
-            log.warn("No manager found for department: " + department);
-        }
-    } else {
-        log.error("Department (referenceName) is null.");
+      // Check if the "isManager" attribute is set and equals true (boolean or string "true")
+      if (isManagerAttr != null && (isManagerAttr.equals(Boolean.TRUE) || "true".equalsIgnoreCase(isManagerAttr.toString()))) {
+        owner = emp;
+        break;
+      }
     }
 
-    return group;
+    // If no manager was found, default to spadmin
+    if (owner == null) {
+      log.debug("No manager found for group: " + group.getName() + ". Defaulting to spadmin.");
+      return "spadmin";
+    }
+
+    log.debug("Assigned owner for group: " + group.getName() + " is: " + owner.getName());
+    return owner;
     ]]>
   </Source>
 </Rule>
-
