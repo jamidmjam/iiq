@@ -11,8 +11,8 @@
     import sailpoint.api.SailPointContext;
     import sailpoint.object.QueryOptions;
 
-    // The group name (e.g. "Finance") is passed directly as a variable
-    String department = group;  // Not args.get("group") — just plain 'group'
+    // 'group' is a subgroup object; get the department name from its reference name
+    String department = group.getReferenceName();
 
     if (department != null) {
 
@@ -27,16 +27,16 @@
 
         if (identities != null && identities.size() > 0) {
             Identity owner = (Identity) identities.get(0);
-            log.info("Assigning owner for group [" + department + "] to: " + owner.getDisplayName());
-            return owner;
+            group.setOwner(owner);
+            log.info("Assigned owner for department [" + department + "] to: " + owner.getDisplayName());
         } else {
-            log.warn("No manager found in department: " + department);
+            log.warn("No manager found for department: " + department);
         }
     } else {
-        log.error("Group variable is null.");
+        log.error("Department (referenceName) is null.");
     }
 
-    return null;
+    return group;
     ]]>
   </Source>
 </Rule>
