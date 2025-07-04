@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Rule language="beanshell" name="Group Owner - Manager of Sub-Group" type="GroupOwner">
+<Rule language="beanshell" name="Group Owner - Manager by Job Title" type="GroupOwner">
   <Description>
-    Set the owner of each subgroup to the first Identity in that subgroup with the attribute "isManager" == true. If no managers are found, default to spadmin.
+    Set the owner of each subgroup to the first Identity in that subgroup with jobtitle equal to "Manager". If none are found, default to spadmin.
   </Description>
   <Signature returnType="Object">
     <Inputs>
@@ -30,11 +30,9 @@
     import sailpoint.object.QueryOptions;
     import sailpoint.object.Identity;
 
-    // Create query options based on the group filter (e.g., department = "Finance")
     QueryOptions qo = new QueryOptions();
     qo.addFilter(group.getFilter());
 
-    // Search for all members of the group
     Iterator identities = context.search(Identity.class, qo);
 
     Identity emp = null;
@@ -42,23 +40,21 @@
 
     while (identities.hasNext()) {
       emp = (Identity) identities.next();
+      String jobTitle = (String) emp.getAttribute("jobtitle");
+      log.debug("Evaluating: " + emp.getName() + " | jobtitle = " + jobTitle);
 
-      Object isManagerAttr = emp.getAttribute("isManager");
-
-      // Check if the "isManager" attribute is set and equals true (boolean or string "true")
-      if (isManagerAttr != null && (isManagerAttr.equals(Boolean.TRUE) || "true".equalsIgnoreCase(isManagerAttr.toString()))) {
+      if (jobTitle != null && jobTitle.equalsIgnoreCase("Manager")) {
+        log.debug("Found manager for group " + group.getName() + ": " + emp.getName());
         owner = emp;
         break;
       }
     }
 
-    // If no manager was found, default to spadmin
     if (owner == null) {
       log.debug("No manager found for group: " + group.getName() + ". Defaulting to spadmin.");
       return "spadmin";
     }
 
-    log.debug("Assigned owner for group: " + group.getName() + " is: " + owner.getName());
     return owner;
     ]]>
   </Source>
