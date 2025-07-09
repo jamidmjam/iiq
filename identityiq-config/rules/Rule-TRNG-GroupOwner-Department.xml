@@ -2,7 +2,7 @@
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Rule language="beanshell" name="Group Owner - Manager by Job Title" type="GroupOwner">
   <Description>
-    Set the owner of each subgroup to the first Identity in that subgroup with jobtitle equal to "Manager". If none are found, default to spadmin.
+    Set .the owner of each subgroup to the first Identity in that subgroup with jobtitle equal to "Manager". If none are found, default to spadmin.
   </Description>
   <Signature returnType="Object">
     <Inputs>
