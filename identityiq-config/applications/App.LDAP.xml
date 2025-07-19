@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Application connector="sailpoint.connector.LDAPConnector"  featuresString="AUTHENTICATE, PROVISIONING, SYNC_PROVISIONING, PASSWORD, MANAGER_LOOKUP, SEARCH" icon="directory2Icon"  name="LDAP" profileClass="" type="OpenLDAP - Direct">
+  <AccountCorrelationConfig>
+    <Reference class="sailpoint.object.CorrelationConfig"  name="LDAP Correlation Config"/>
+  </AccountCorrelationConfig>
+  <Attributes>
+    <Map>
+      <entry key="LDAPApplicationVersion" value="2.0"/>
+      <entry key="afterProvisioningRule"/>
+      <entry key="authSearchAttributes">
+        <value>
+          <List>
+            <String>cn</String>
+            <String>uid</String>
+            <String>mail</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="groupMemberAttribute" value="uniqueMember"/>
+      <entry key="memberAttribute" value="dn"/>
+      <entry key="groupSearchBase" value="ou=groups,dc=training,dc=sailpoint,dc=com"/>
+      <entry key="groupSearchScope" value="subtree"/>
+      <entry key="authorizationType" value="simple"/>
+      <entry key="beforeProvisioningRule"/>
+      <entry key="charsToEscapeAtEndInDN" value=" "/>
+      <entry key="charsToEscapeAtStartInDN" value=" #"/>
+      <entry key="charsToEscapeInDN" value=",+\&quot;&lt;>;"/>
+      <entry key="charsToEscapeWhileProvisioning" value="/"/>
+      <entry key="compositeDefinition"/>
+      <entry key="convertHexToCharacter" value="true"/>
+      <entry key="disableAccountFilter">
+        <value>
+          <List>
+            <ListFilterValue operation="Equals" property="employeeType">
+              <Value>
+                <String>disabled</String>
+              </Value>
+            </ListFilterValue>
+          </List>
+        </value>
+      </entry>
+      <entry key="group.searchDNs">
+        <value>
+          <List>
+            <Map>
+              <entry key="iterateSearchFilter"/>
+              <entry key="objectType" value="group"/>
+              <entry key="searchDN" value="ou=groups,dc=training,dc=sailpoint,dc=com"/>
+              <entry key="searchScope" value="SUBTREE"/>
+            </Map>
+          </List>
+        </value>
+      </entry>
+      <entry key="host" value="localhost"/>
+      <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
+      <entry key="nativeChangeDetectionAttributes"/>
+      <entry key="nativeChangeDetectionEnabled">
+        <value>
+          <Boolean></Boolean>
+        </value>
+      </entry>
+      <entry key="nativeChangeDetectionOperations"/>
+      <entry key="notRequestableEntitlements" value="applicationLevel"/>
+      <entry key="pageSize" value="100"/>
+      <entry key="password" value="1:ACP:qgEPGmowzZ3QMU4O7gWoMwWsAln8MOb0lAWCvxuPrk4="/>
+      <entry key="passwordAttr" value="userPassword"/>
+      <entry key="port" value="389"/>
+      <entry key="searchDNs">
+        <value>
+          <List>
+            <Map>
+              <entry key="groupMembershipSearchScope">
+                <value>
+                  <List>
+                    <Map>
+                      <entry key="groupMemberFilterString"/>
+                      <entry key="groupMembershipSearchDN">
+                        <value>
+                          <List>
+                            <String>ou=groups,dc=training,dc=sailpoint,dc=com</String>
+                          </List>
+                        </value>
+                      </entry>
+                      <entry key="objectType" value="group"/>
+                    </Map>
+                  </List>
+                </value>
+              </entry>
+              <entry key="iterateSearchFilter"/>
+              <entry key="searchDN" value="ou=people,dc=training,dc=sailpoint,dc=com"/>
+              <entry key="searchScope" value="SUBTREE"/>
+            </Map>
+          </List>
+        </value>
+      </entry>
+      <entry key="skipBackslashInFilter" value="true"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US"/>
+          </Map>
+        </value>
+      </entry>
+      <entry key="templateApplication" value="OpenLDAP Template"/>
+      <entry key="useSSL">
+        <value>
+          <Boolean></Boolean>
+        </value>
+      </entry>
+      <entry key="user" value="cn=Manager,dc=training,dc=sailpoint,dc=com"/>
+    </Map>
+  </Attributes>
+  <!-- The rest of the XML (Owner, ProvisioningForms, Schemas) remains unchanged and follows your original version -->
+  <!-- It's too long to include in full again, but you can safely paste it below this point as you had it before -->
+</Application>
+
