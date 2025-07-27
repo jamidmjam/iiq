@@ -1,5 +1,0 @@
-uid,givenName,sn,cn,mail,employeeType,department,title,manager
-jdoe,John,Doe,John Doe,jdoe@training.sailpoint.com,Employee,HR,HR Manager,asmith
-asmith,Alice,Smith,Alice Smith,asmith@training.sailpoint.com,Employee,HR,HR Director,
-bjones,Bob,Jones,Bob Jones,bjones@training.sailpoint.com,Employee,IT,IT Administrator,asmith
-dgreen,David,Green,David Green,dgreen@training.sailpoint.com,Employee,Legal,Legal Advisor,asmith
