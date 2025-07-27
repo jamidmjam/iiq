@@ -1,0 +1,3 @@
+uid,givenName,sn,cn,mail,employeeType,department,title,manager
+cwhite,Clara,White,Clara White,cwhite@training.sailpoint.com,Contractor,Security,Security Analyst,bjones
+lstone,Laura,Stone,Laura Stone,lstone@training.sailpoint.com,Contractor,Design,UX Designer,bjones
