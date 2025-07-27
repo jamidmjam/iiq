@@ -1,0 +1,53 @@
+
+employeeId,firstName,lastName,managerId,fullName,email,department,region,location,inactiveUser,jobtitle,costcenter,workStatus
+E001,James,Smith,,James Smith,James.Smith@demoexample.com,Executive Management,Americas,Austin,FALSE,Chief Executive Officer,"R03,L07,L08,L09",Active
+E002,Mary,Johnson,E001,Mary Johnson,Mary.Johnson@demoexample.com,Regional Operations,Americas,Austin,FALSE,Global Infrastructure Manager,"L05,R04",Active
+E003,Jakob,Brouwer,,Jakob Brouwer,Jakob.Brouwer@demoexample.com,Finance,Europe,Amsterdam,FALSE,Chief Financial Officer,"E01,R05",Active
+E004,Aaron,Nichols,,Aaron Nichols,Aaron.Nichols@demoexample.com,Information Technology,Asia-Pacific,Taipei,FALSE,Chief Technology Officer,T01,Active
+E005,Sandra,Lopez,E002,Sandra Lopez,Sandra.Lopez@demoexample.com,Human Resources,Americas,Austin,TRUE,HR Coordinator,"H01,H03",Terminated
+E006,Catherine,Simmons,E002,Catherine Simmons,Catherine.Simmons@demoexample.com,Human Resources,Americas,New York,FALSE,HR Manager,H02,Active
+E007,Carl,Foster,E002,Carl Foster,Carl.Foster@demoexample.com,IT Operations,Americas,Austin,FALSE,System Administrator,I01,Active
+E008,Larry,Morgan,E003,Larry Morgan,Larry.Morgan@demoexample.com,Finance,Europe,London,FALSE,Finance Director,"F02,F03",Active
+E009,Richard,Jackson,E003,Richard Jackson,Richard.Jackson@demoexample.com,Finance,Americas,Chicago,FALSE,Finance Manager,F04,Active
+E010,Andrew,Carter,E003,Andrew Carter,Andrew.Carter@demoexample.com,Finance,Europe,London,FALSE,Accounts Manager,"F04,A02",Active
+E011,Amy,Chen,E003,Amy Chen,Amy.Chen@demoexample.com,Finance,Asia-Pacific,Taipei,FALSE,Finance Supervisor,F05,Active
+E012,Mariana,Silva,E002,Mariana Silva,Mariana.Silva@demoexample.com,Marketing,Americas,Seattle,FALSE,Marketing Specialist,"M01,M02",Active
+E013,Dennis,Barnes,E012,Dennis Barnes,Dennis.Barnes@demoexample.com,Marketing,Americas,Seattle,FALSE,Marketing Manager,M03,Active
+E014,Amanda,Ross,E002,Amanda Ross,Amanda.Ross@demoexample.com,Sales,Americas,Austin,FALSE,Sales Lead,"R01,L03",Active
+E015,Sara,Berry,E014,Sara Berry,Sara.Berry@demoexample.com,Sales,Americas,Austin,FALSE,Sales Specialist,S01,Active
+E016,Catherine,Brown,E014,Catherine Brown,Catherine.Brown@demoexample.com,Sales,Americas,Austin,FALSE,Sales Specialist,"S01,S02",Active
+E017,Kevin,Davis,E014,Kevin Davis,Kevin.Davis@demoexample.com,Sales,Europe,London,FALSE,Sales Specialist,"S02,R06",Active
+E018,Jessica,Miller,E012,Jessica Miller,Jessica.Miller@demoexample.com,Marketing,Asia-Pacific,Sydney,FALSE,Marketing Analyst,M05,Active
+E019,Thomas,Brown,E007,Thomas Brown,Thomas.Brown@demoexample.com,IT Operations,Americas,Austin,FALSE,IT Specialist,"I02,I03",Active
+E020,Patricia,Wilson,E007,Patricia Wilson,Patricia.Wilson@demoexample.com,IT Operations,Americas,Austin,FALSE,IT Analyst,I03,Active
+E021,Nancy,Anderson,E012,Nancy Anderson,Nancy.Anderson@demoexample.com,Marketing,Europe,London,FALSE,Marketing Coordinator,M04,Active
+E022,Joshua,Thompson,E012,Joshua Thompson,Joshua.Thompson@demoexample.com,Marketing,Americas,Austin,FALSE,Marketing Analyst,M04,Active
+E023,Emily,Moore,E014,Emily Moore,Emily.Moore@demoexample.com,Sales,Asia-Pacific,Singapore,FALSE,Sales Representative,S03,Active
+E024,Daniel,Lee,E004,Daniel Lee,Daniel.Lee@demoexample.com,Engineering,Asia-Pacific,Taipei,FALSE,Software Engineer,T02,Active
+E025,David,Clark,E004,David Clark,David.Clark@demoexample.com,Engineering,Europe,Paris,FALSE,Systems Engineer,T03,Active
+E026,Sarah,Hall,E004,Sarah Hall,Sarah.Hall@demoexample.com,Engineering,Americas,Austin,FALSE,DevOps Engineer,T04,Active
+E027,Jennifer,Turner,E012,Jennifer Turner,Jennifer.Turner@demoexample.com,Marketing,Americas,Austin,FALSE,Market Research Analyst,M02,Active
+E028,George,King,E012,George King,George.King@demoexample.com,Marketing,Europe,Berlin,FALSE,Marketing Specialist,M01,Active
+E029,Brian,Scott,E003,Brian Scott,Brian.Scott@demoexample.com,Finance,Americas,Houston,FALSE,Accountant,F06,Active
+E030,Laura,Adams,E003,Laura Adams,Laura.Adams@demoexample.com,Finance,Europe,Dublin,FALSE,Accountant,"F06,F07",Active
+E031,Gary,Walker,E007,Gary Walker,Gary.Walker@demoexample.com,IT Operations,Europe,London,FALSE,IT Support,I01,Active
+E032,Kimberly,Hill,E007,Kimberly Hill,Kimberly.Hill@demoexample.com,IT Operations,Asia-Pacific,Tokyo,FALSE,Network Engineer,"I02,I05",Active
+E033,Robert,Green,E014,Robert Green,Robert.Green@demoexample.com,Sales,Europe,Rome,FALSE,Sales Manager,S04,Active
+E034,Lisa,Young,E033,Lisa Young,Lisa.Young@demoexample.com,Sales,Europe,Rome,FALSE,Sales Representative,"S04,S05",Active
+E035,Mark,Hernandez,E004,Mark Hernandez,Mark.Hernandez@demoexample.com,Engineering,Americas,Austin,FALSE,QA Engineer,T02,Active
+E036,Linda,King,E004,Linda King,Linda.King@demoexample.com,Engineering,Americas,Austin,FALSE,UI Designer,T05,Active
+E037,Barbara,Nelson,E002,Barbara Nelson,Barbara.Nelson@demoexample.com,Human Resources,Europe,London,FALSE,HR Specialist,H04,Active
+E038,Paul,Reed,E007,Paul Reed,Paul.Reed@demoexample.com,IT Operations,Americas,Austin,FALSE,Database Administrator,I06,Active
+E039,Carol,Cooper,E012,Carol Cooper,Carol.Cooper@demoexample.com,Marketing,Asia-Pacific,Tokyo,FALSE,Digital Marketer,M03,Active
+E040,Steven,Ramirez,E033,Steven Ramirez,Steven.Ramirez@demoexample.com,Sales,Americas,Miami,FALSE,Account Executive,S05,Active
+E041,Karen,Brooks,E033,Karen Brooks,Karen.Brooks@demoexample.com,Sales,Americas,New York,FALSE,Sales Associate,S04,Active
+E042,Lisa,Flores,E007,Lisa Flores,Lisa.Flores@demoexample.com,IT Operations,Asia-Pacific,Singapore,FALSE,Security Specialist,I07,Active
+E043,Jason,Diaz,E012,Jason Diaz,Jason.Diaz@demoexample.com,Marketing,Americas,Los Angeles,FALSE,Brand Manager,M01,Active
+E044,Betty,Perry,E014,Betty Perry,Betty.Perry@demoexample.com,Sales,Americas,Chicago,FALSE,Inside Sales Rep,S03,Active
+E045,Chris,Long,E003,Chris Long,Chris.Long@demoexample.com,Finance,Americas,San Francisco,FALSE,Financial Analyst,F07,Active
+E046,Patricia,Reed,E003,Patricia Reed,Patricia.Reed@demoexample.com,Finance,Europe,Paris,FALSE,Financial Analyst,F08,Active
+E047,Debra,Torres,E012,Debra Torres,Debra.Torres@demoexample.com,Marketing,Americas,Austin,FALSE,Event Coordinator,M05,Active
+E048,Maria,Sanchez,E007,Maria Sanchez,Maria.Sanchez@demoexample.com,IT Operations,Americas,Austin,FALSE,IT Specialist,I02,Active
+E049,Ronald,Bennett,E002,Ronald Bennett,Ronald.Bennett@demoexample.com,Human Resources,Americas,Chicago,FALSE,HR Generalist,H03,Active
+E050,William,Reed,E033,William Reed,William.Reed@demoexample.com,Sales,Europe,Berlin,FALSE,Sales Analyst,S06,Active
+//E051,Caroline,Martin,E011,Caroline Martin,Caroline.Martin@demoexample.com,Finance,Asia-Pacific,Taipei,FALSE,Accountant,F03,Active

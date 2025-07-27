@@ -1,0 +1,29 @@
+
+contractorId,firstName,lastName,managerId,fullName,email,department,region,location,inactiveUser,jobtitle,costcenter,workStatus
+C001,Thomas,Martinez,E009,Thomas Martinez,Thomas.Martinez@contractor.com,Finance,Americas,Austin,FALSE,Accounting Consultant,C01,Active
+C001,Thomas,Martinez,E009,Thomas Martinez,Thomas.Martinez@contractor.com,Finance,Americas,Austin,FALSE,Accounting Consultant,C02,Active
+C002,Allen,Burton,E004,Allen Burton,Allen.Burton@contractor.com,IT Operations,Europe,London,FALSE,Systems Contractor,I04,Active
+C004,Nancy,Stevens,E012,Nancy Stevens,Nancy.Stevens@contractor.com,Marketing,Americas,Austin,FALSE,Marketing Contractor,M02,Active
+C005,Kevin,Thompson,E004,Kevin Thompson,Kevin.Thompson@contractor.com,Engineering,Americas,Austin,FALSE,Engineering Contractor,T06,Active
+C006,Maria,White,E003,Maria White,Maria.White@contractor.com,Finance,Europe,London,FALSE,Finance Contractor,F05,Active
+C007,Jerry,Wilson,E014,Jerry Wilson,Jerry.Wilson@contractor.com,Sales,Americas,Austin,FALSE,Sales Contractor,S07,Active
+C008,Stephanie,Lewis,E012,Stephanie Lewis,Stephanie.Lewis@contractor.com,Marketing,Asia-Pacific,Tokyo,FALSE,Marketing Contractor,M02,Active
+C009,Brian,Young,E007,Brian Young,Brian.Young@contractor.com,IT Operations,Americas,Austin,FALSE,IT Contractor,I08,Active
+C010,Janet,King,E003,Janet King,Janet.King@contractor.com,Finance,Europe,London,FALSE,Finance Contractor,F02,Active
+C011,Brandon,Wright,E012,Brandon Wright,Brandon.Wright@contractor.com,Marketing,Americas,Seattle,FALSE,Marketing Contractor,M03,Active
+C012,Olivia,Adams,E014,Olivia Adams,Olivia.Adams@contractor.com,Sales,Americas,Chicago,FALSE,Sales Contractor,S05,Active
+C013,Ethan,Baker,E014,Ethan Baker,Ethan.Baker@contractor.com,Sales,Europe,Berlin,FALSE,Sales Contractor,S06,Active
+C014,Isabella,Carter,E007,Isabella Carter,Isabella.Carter@contractor.com,IT Operations,Asia-Pacific,Singapore,FALSE,IT Contractor,I05,Active
+C015,Mason,Nelson,E003,Mason Nelson,Mason.Nelson@contractor.com,Finance,Americas,Houston,FALSE,Finance Contractor,F03,Active
+C015,Mason,Nelson,E003,Mason Nelson,Mason.Nelson@contractor.com,Finance,Americas,Houston,FALSE,Finance Contractor,F09,Active
+C016,Chloe,Perez,E002,Chloe Perez,Chloe.Perez@contractor.com,Human Resources,Americas,Austin,FALSE,HR Contractor,H02,Active
+C017,Jack,Roberts,E014,Jack Roberts,Jack.Roberts@contractor.com,Sales,Asia-Pacific,Singapore,FALSE,Sales Contractor,S04,Active
+C018,Sofia,Turner,E012,Sofia Turner,Sofia.Turner@contractor.com,Marketing,Europe,Paris,FALSE,Marketing Contractor,M04,Active
+C019,Liam,Phillips,E007,Liam Phillips,Liam.Phillips@contractor.com,IT Operations,Europe,London,FALSE,IT Contractor,I04,Active
+C020,Emily,Parker,E003,Emily Parker,Emily.Parker@contractor.com,Finance,Europe,Amsterdam,FALSE,Finance Contractor,F08,Active
+C021,Aiden,Collins,E014,Aiden Collins,Aiden.Collins@contractor.com,Sales,Americas,Austin,FALSE,Sales Contractor,S07,Active
+C022,Grace,Stewart,E012,Grace Stewart,Grace.Stewart@contractor.com,Marketing,Americas,Austin,FALSE,Marketing Contractor,M01,Active
+C022,Grace,Stewart,E012,Grace Stewart,Grace.Stewart@contractor.com,Marketing,Americas,Austin,FALSE,Marketing Contractor,M06,Active
+C023,Dylan,Edwards,E007,Dylan Edwards,Dylan.Edwards@contractor.com,IT Operations,Americas,Austin,FALSE,IT Contractor,I07,Active
+//C003,Michael,Brooks,E003,Michael Brooks,Michael.Brooks@contractor.com,Accounting,Asia-Pacific,Taipei,FALSE,Accounting Contractor,F01,Active
+//C003,Michael,Brooks,E003,Michael Brooks,Michael.Brooks@contractor.com,Accounting,Asia-Pacific,Taipei,FALSE,Accounting Contractor,F02,Active
