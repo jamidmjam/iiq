@@ -1,0 +1,15 @@
+dn: dc=training,dc=sailpoint,dc=com
+objectClass: top
+objectClass: domain
+dc: training
+
+dn: ou=people,dc=training,dc=sailpoint,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=training,dc=sailpoint,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
